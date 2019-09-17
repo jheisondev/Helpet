@@ -2,11 +2,12 @@ import Sequelize from 'sequelize';
 
 import User from '../app/models/User';
 import File from '../app/models/File';
+import Pet from '../app/models/Pet';
 
 // info connection
 import databaseConfig from '../config/database';
 
-const models = [User, File];
+const models = [User, File, Pet];
 
 class Database {
   constructor() {
