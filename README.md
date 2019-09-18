@@ -3,10 +3,10 @@ Aplicação desenvolvida com intuito de facilitar a adoção de Pets entre usuá
 
 Proximos commits:</br>
 
-      Upload das fotos do pet;</br>
-      Reset de senha;</br>
-      Listagem dos pets para adoção com filtro por cidade||estado;</br>
-      Listagem dos pets adotados;</br>
-      chat para usario que solicitar adoção (websocket);</br>
+      Upload das fotos do pet;
+      Reset de senha;
+      Listagem dos pets para adoção com filtro por cidade||estado;
+      Listagem dos pets adotados;
+      chat para usario que solicitar adoção (websocket);
 
 Aos poucos mais funcionalidades serão adicionadas!
