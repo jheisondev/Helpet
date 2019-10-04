@@ -1,6 +1,5 @@
 import * as Yup from 'yup';
 import Pet from '../models/Pet';
-import User from '../models/User';
 
 class PetController {
   // Create Pet ############################
@@ -25,28 +24,32 @@ class PetController {
     }
 
     // Criando Pet
-    const {
-      id,
-      name,
-      raca,
-      city,
-      state,
-      date_birth,
-      size,
-      adoption_status,
-      responsible_id,
-    } = await Pet.create(req.body);
-    return res.json({
-      id,
-      name,
-      raca,
-      city,
-      state,
-      date_birth,
-      size,
-      adoption_status,
-      responsible_id,
-    });
+    try {
+      const {
+        id,
+        name,
+        raca,
+        city,
+        state,
+        date_birth,
+        size,
+        adoption_status,
+        responsible_id,
+      } = await Pet.create(req.body);
+      return res.json({
+        id,
+        name,
+        raca,
+        city,
+        state,
+        date_birth,
+        size,
+        adoption_status,
+        responsible_id,
+      });
+    } catch (error) {
+      return res.json(error);
+    }
   }
 
   // Create Usuario ############################
@@ -54,6 +57,7 @@ class PetController {
   // Update de Usuario ###########################
   async update(req, res) {
     const schema = Yup.object().shape({
+      id: Yup.number().required(),
       name: Yup.string().min(3, 'O nome deve conter no mínimo 3 letras!'),
       city: Yup.string(),
       state: Yup.string()
@@ -63,6 +67,7 @@ class PetController {
       size: Yup.string(),
       adoption_status: Yup.boolean(),
       responsible_id: Yup.number().required(),
+      avatar_pet_id: Yup.number().required(),
       raca: Yup.string(),
     });
 
@@ -70,36 +75,39 @@ class PetController {
       return res.status(400).json({ error: 'Dados inválidos!' });
     }
 
-    const petExists = await User.findOne({
-      where: { id: req.body.responsible_id },
-    });
+    const pet = await Pet.findByPk(req.body.id);
 
-    if (!petExists) {
+    if (!pet) {
       return res.status(400).json({ error: 'Pet não encontrado!' });
     }
-    // Criando Pet
-    const {
-      id,
-      name,
-      raca,
-      city,
-      state,
-      date_birth,
-      size,
-      adoption_status,
-      responsible_id,
-    } = await Pet.update(req.body);
-    return res.json({
-      id,
-      name,
-      raca,
-      city,
-      state,
-      date_birth,
-      size,
-      adoption_status,
-      responsible_id,
-    });
+
+    // atualizando Pet
+    try {
+      const {
+        id,
+        name,
+        raca,
+        city,
+        state,
+        date_birth,
+        size,
+        adoption_status,
+        responsible_id,
+      } = await pet.update(req.body);
+      return res.json({
+        id,
+        name,
+        raca,
+        city,
+        state,
+        date_birth,
+        size,
+        adoption_status,
+        responsible_id,
+      });
+    } catch (error) {
+      return res.json(error);
+    }
   }
   // Update de Usuario ###########################
 }

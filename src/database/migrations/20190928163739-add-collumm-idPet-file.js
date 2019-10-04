@@ -1,11 +1,11 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     // nome da tabela e nome da coluna que sera add
-    return queryInterface.addColumn('pets', 'responsible_id', {
+    return queryInterface.addColumn('files', 'id_pet', {
       // caracteristicas da tabela
       type: Sequelize.INTEGER,
       // id da tabala file sera passado para avatarId do usuario
-      references: { model: 'users', key: 'id' },
+      references: { model: 'pets', key: 'id' },
       onUpdate: 'CASCADE',
       onDelete: 'CASCADE',
       allowNull: true,
@@ -13,6 +13,6 @@ module.exports = {
   },
 
   down: queryInterface => {
-    return queryInterface.removeColumn('pets', 'responsible_id');
+    return queryInterface.removeColumn('files', 'id_pet');
   },
 };

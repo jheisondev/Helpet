@@ -102,15 +102,18 @@ class UserController {
     if (oldPassword && !(await user.checkPassword(oldPassword))) {
       return res.status(401).json({ erro: 'Senha inválida!' });
     }
-
-    const { id, name, account_status } = await user.update(req.body);
-    return res.json({
-      id,
-      name,
-      user_name,
-      email,
-      account_status,
-    });
+    try {
+      const { id, name, account_status } = await user.update(req.body);
+      return res.json({
+        id,
+        name,
+        user_name,
+        email,
+        account_status,
+      });
+    } catch (error) {
+      return res.json(error);
+    }
   }
   // Update de Usuario ###########################
 }

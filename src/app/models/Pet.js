@@ -21,9 +21,8 @@ class Pet extends Model {
   }
 
   static associate(models) {
-    // esse model pertence ao model file
-    // id de file sera armazendo no model User na coluna avatar_id
     this.belongsTo(models.User, { foreignKey: 'responsible_id' });
+    this.hasOne(models.File, { foreignKey: 'id_pet' });
   }
 }
 

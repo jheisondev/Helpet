@@ -6,6 +6,7 @@ import UserController from './app/controllers/UserController';
 import SessionController from './app/controllers/SessionController';
 import FileController from './app/controllers/FileController';
 import PetController from './app/controllers/PetController';
+import AdoptController from './app/controllers/AdoptController';
 
 import authMiddleware from './app/middlewares/auth';
 
@@ -18,9 +19,12 @@ routes.post('/sessions', SessionController.store);
 routes.use(authMiddleware);
 
 routes.put('/users', UserController.update);
+
 routes.post('/pets', PetController.store);
 routes.put('/pets', PetController.update);
+routes.get('/adopt', AdoptController.index);
 
-routes.post('/files', upload.single('file'), FileController.store);
+routes.post('/upload-user', upload.single('file'), FileController.store);
+routes.post('/upload-pet', upload.single('avatar'), FileController.store);
 
 export default routes;
